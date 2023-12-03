@@ -55,34 +55,34 @@ export function carouselRender(data) {
     carousel.autoCycleTimer.add(timer);
 }
 
-// function getPrev() {
-//     //获取到轮播图每一项的图片容器
-//     const carouselItems = document.getElementsByClassName('carousel-item');
-//     let length = carouselItems.length;
-//     //当后退到第一张时，重置为总长度，防止index变为负数导致bug
-//     carousel.currentIndex == 0 && (carousel.currentIndex = length);
-//     //每调用一次 getPrev，序号-1
-//     let index = carousel.currentIndex = --carousel.currentIndex % length;
-//     //将类数组转变为数组
-//     let newArr = Array.from(carouselItems);
-//     //计算得到轮播图每一项的图片容器的宽度
-//     let { width = 0 } = getElementRect(carouselItems[0]);
-//     //轮播图数组移动
-//     newArr = [...newArr.slice(index), ...newArr.slice(0, index)];
-//     newArr.forEach((item, i) => {
-//         //轮播图数组第一项移动到最后一项，其他项顺序）
-//         if (i == θ) {
-//             item.style.opacity = 0;
-//             item.style.transform = `translatex(${width * (length - 1)}px)`;
-//         } else {
-//         }
-//         item.style.opacity = 1;
-//         item.style.transform = `translatex(${width * (i - 1)}px)`;
+function getPrev() {
+    //获取到轮播图每一项的图片容器
+    const carouselItems = document.getElementsByClassName('carousel-item');
+    let length = carouselItems.length;
+    //当后退到第一张时，重置为总长度，防止index变为负数导致bug
+    carousel.currentIndex == 0 && (carousel.currentIndex = length);
+    //每调用一次 getPrev，序号-1
+    let index = carousel.currentIndex = --carousel.currentIndex % length;
+    //将类数组转变为数组
+    let newArr = Array.from(carouselItems);
+    //计算得到轮播图每一项的图片容器的宽度
+    let { width = 0 } = getElementRect(carouselItems[0]);
+    //轮播图数组移动
+    newArr = [...newArr.slice(index), ...newArr.slice(0, index)];
+    newArr.forEach((item, i) => {
+        //轮播图数组第一项移动到最后一项，其他项顺序）
+        if (i == θ) {
+            item.style.opacity = 0;
+            item.style.transform = `translatex(${width * (length - 1)}px)`;
+        } else {
+        }
+        item.style.opacity = 1;
+        item.style.transform = `translatex(${width * (i - 1)}px)`;
 
-//     });
-//     //指示器移动
-//     indicatorsRender(index);
-// }
+    });
+    //指示器移动
+    indicatorsRender(index);
+}
 
 function getNext() {
     const carouselItems = document.getElementsByClassName('carousel-item');
