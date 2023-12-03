@@ -17,6 +17,14 @@
   width: 100%;
   min-height: 450px;
 }
+
+.resommend-playlist-cover img {
+  width: 100%;
+  height: auto;
+  font-size: 0;
+  transition: transform 0.2s linear;
+}
+
 .wrapper .player-control {
   background-color: #f6f6f8;
   height: 65px;
@@ -25,6 +33,7 @@
 
 .wrapper .content {
   width: 100%;
+  min-height: 450px;
 }
 .w {
   width: 90%;
@@ -98,8 +107,8 @@
 .carousel-indicators > li {
   width: 50px;
   height: 4px;
-  /* background-color: rgba(255, 255, 255, 0.4); */
-  background-color: rgb(29, 29, 29);
+  background-color: rgba(255, 255, 255, 0.461);
+  /* background-color: rgb(29, 29, 29); */
   margin: 15px 2px;
   cursor: pointer;
 }
@@ -139,9 +148,13 @@
   right: 5px;
   color: #ccc;
   font-size: 20px;
+  transition: opacity 0.2 linear;
 }
 .hover .recommend-playlist-icon {
   opacity: 1;
+}
+.hover .recommend-playlist-cover img {
+  transform: scale(1.1);
 }
 .recommend-playlist-title {
   margin-top: 5px;

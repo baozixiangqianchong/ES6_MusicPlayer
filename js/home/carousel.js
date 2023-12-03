@@ -133,6 +133,9 @@ import Ajax from "../service/ajax.js";
 Ajax({
     url: "/homepage/block/page",
 }).then((res) => {
+    // constrecommendData=[...res.data.blocks[1].creatives];
+    // recommendRender(recommendData);
+    // 获取推荐歌曲
     carousel.data = []
     //  res.data.blocks[0].extInfo.banners;
     const a = {
@@ -245,4 +248,46 @@ function clearAllTimer() {
         }
         carousel.autoCycleTimer.clear()
     }
+}
+
+function recommendRender(data) {
+    // 获得推荐歌单盒子
+    const recommendWrapper = document.querySelector(".recommend-playlist-container");
+    let template = "";
+    let length = data.length;
+    data.forEach((item, index) => {
+        template += `<li data-index=${index} class="recommend-playlist-item d-flex flex-column}" style="width:${98 / length}%">
+            <div class="recommend-playlist-cover">
+                <a href='#/recommendList/:${item.creativeId}'>
+                    <img src="${item.uiElement.image.imageUrl} alt="">
+                        <svg class="recommend-playlist-icon icon" aria-hidden="true">
+                            <use xlink:href="#icon-hanhan-01-011"></use>
+                        </svg>
+                </a>
+            </div>
+            <div class="recommend-playlist-title multi-text-omitted">
+                ${item.uiElement.mainTitle.title}
+            </div>
+        </li>`
+    })
+    recommendWrapper.innerHTML = template;
+}
+
+function initRecommendEvent() {
+    //动态增加hover类
+    const recommendWrapper = document.querySelector(".recommend-playlist-container")
+    recommendWrapper.addEventListener("mouseenter",
+        (e) => {
+            if (e.target.tagName === "LI") {
+                e.target.setAttribute("class",
+                    "recommend-playlist-item d-flex flex-column hover");
+            }
+        }, true)
+    recommendWrapper.addEventListener("mouseleave",
+        (e) => {
+            if (e.target.tagName === "LI") {
+                e.target.setAttribute("class",
+                    "recommend-playlist-item d-flex flex-column")
+            }
+        }, true)
 }
