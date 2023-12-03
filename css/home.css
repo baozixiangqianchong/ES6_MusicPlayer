@@ -39,7 +39,6 @@
   height: 300px;
   width: 100%;
   overflow: hidden;
-  
 }
 .carousel-content {
   position: absolute;
@@ -99,12 +98,13 @@
 .carousel-indicators > li {
   width: 50px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.4);
+  /* background-color: rgba(255, 255, 255, 0.4); */
+  background-color: rgb(29, 29, 29);
   margin: 15px 2px;
   cursor: pointer;
 }
 .carousel-indicators > .active {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(255, 255, 255);
 }
 .recommend-playlist {
   width: 100%;
