@@ -23,3 +23,28 @@ export function debounce(fn, times, isImmediately = true) {
     }
     return cb;
 }
+export function getRouteroptions(hash) {
+    const options = {
+        //路由配置选项
+        name: "",
+        params: "",
+        query: ""
+    }
+    if (!hash || hash == "#home") {
+        options.name = "home";
+    } else {
+        //提取name params query信息
+        //     0    1      2
+        //<a href='#/name/:params?query1=value1?query2=value2'></a>
+        try {
+            const routerArr = hash.slice(1).split("/");
+            options.name = routerArr[1];
+            const paramsArr = routerArr[2].split("?");
+            options.params = paramsArr[0].slice(1);
+            options.query = paramsArr.slice(1);
+        } catch (error) {
+            options.name = "404";
+        }
+    }
+    return options
+}

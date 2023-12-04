@@ -1,13 +1,13 @@
 const carouselControl = `
-<button class="carousel-control carousel-control-left carousel-control-hover>
+<button class="carousel-control carousel-control-left carousel-control-hover">
 <svg class="icon" aria-hidden="true">
      <use xlink:href="#icon-xiangzuojiantou"></use>
        </svg>
 </button>
-<button class="carousel-control carousel-control-right carousel-control-hover>
+<button class="carousel-control carousel-control-right carousel-control-hover">
 <svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-xiangyoujiantou"></use>
-     </svg>
+</svg>
 </button>
 `
 //轮播图配置
@@ -24,40 +24,42 @@ export function carouselRender(data) {
     let carouselItem = "",
         carouselIndicatorsLi = "";
     const wrapper = document.querySelector(".carousel-wrapper");
-    let { width = 0 } = wrapper.getBoundingClientRect()//得到图片的宽高
-    //动态生成轮播图
-    data.forEach((item, index) => {
-        //指示器激活选中判断
-        let isActive = carousel.currentIndex == index ? "active" : "";
-        // 动态生成轮播图图片，并给每一张图片加上偏移量和动画效果
-        carouselItem += `<div class="carousel-item ${"#" + index}" 
-        style='transform:translateX(${width * (index - 1)}px);transition-duration:${carousel.animationTimes}s'>
-            <img src="${item.pic}" alt="">
-        </div>`;
-        // 动态生成轮播图指示器
-        carouselIndicatorsLi += `
-            <li data-slide-to="${index}" class="carousel-indicators-li ${isActive}"></li>
-        `
-    });
-    //通过模板字符串，按照home.html中的html结构进行排布
-    const carouselContainer = `
-        <div class="carousel-container" style="transition:transform ${carousel.animationTimes}s">
-             ${carouselControl}
-            <div class="carousel-content">
-            ${carouselItem}
-            </div>
-        </div>
-    `;
-    const carouselIndicators = `
-    <ul class="carousel-indicators d-flex">
-        ${carouselIndicatorsLi}
-    </ul>
-    `
-    //将得到的字符串通过 innerHTML 插入到轮播图盒子
-    wrapper.innerHTML = (carouselContainer + carouselIndicators);
-    //通过定时器开启自动轮播，每过一段时间调用getNext方法
-    let timer = setInterval(getNext, carousel.times);
-    carousel.autoCycleTimer.add(timer);
+    if (wrapper) {
+        //获取到wrapper再进行渲染轮播图
+        let { width = 0 } = wrapper.getBoundingClientRect()//得到图片的宽高
+        //动态生成轮播图
+        data.forEach((item, index) => {
+            //指示器激活选中判断
+            let isActive = carousel.currentIndex == index ? "active" : "";
+            // 动态生成轮播图图片，并给每一张图片加上偏移量和动画效果
+            carouselItem += `<div class="carousel-item ${"#" + index}" 
+                style='transform:translateX(${width * (index - 1)}px);transition-duration:${carousel.animationTimes}s'>
+                    <img src="${item.pic}" alt="">
+                </div>`;
+            // 动态生成轮播图指示器
+            carouselIndicatorsLi += `
+                <li data-slide-to="${index}" class="carousel-indicators-li ${isActive}"></li>
+            `
+        });
+        //通过模板字符串，按照home.html中的html结构进行排布
+        const carouselContainer = `
+            <div class="carousel-container" style="transition:transform ${carousel.animationTimes}s">
+              ${carouselControl}
+              <div class="carousel-content">
+                ${carouselItem}
+             </div>
+            </div>`;
+        const carouselIndicators = `
+            <ul class="carousel-indicators d-flex">
+                ${carouselIndicatorsLi}
+            </ul>
+            `
+        //将得到的字符串通过 innerHTML 插入到轮播图盒子
+        wrapper.innerHTML = (carouselContainer + carouselIndicators);
+        //通过定时器开启自动轮播，每过一段时间调用getNext方法
+        let timer = setInterval(getNext, carousel.times);
+        carousel.autoCycleTimer.add(timer);
+    }
 }
 
 function getPrev() {
@@ -128,64 +130,62 @@ export function indicatorsRender(index) {
 function getElementRect(ele) {
     return ele.getBoundingClientRect();
 }
-import Ajax from "../service/ajax.js";
 
-Ajax({
-    url: "/homepage/block/page",
-}).then((res) => {
-    // constrecommendData=[...res.data.blocks[1].creatives];
-    // recommendRender(recommendData);
-    // 获取推荐歌曲
-    carousel.data = []
-    //  res.data.blocks[0].extInfo.banners;
-    const a = {
-        "bannerId": "hp-vip-updt#t#UnLogin",
-        "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-        "exclusive": false,
-        "titleColor": "blue",
-        "showAdTag": false,
-        "targetType": 70000,
-        "targetId": 100000128,
-        "typeTitle": "新用户限时 还剩6天",
-        "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-        "songFinishStatus": false,
-        "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-    }
-    const b = {
-        "bannerId": "hp-vip-updt#t#UnLogin",
-        // "pic": "https://seopic.699pic.com/photo/40008/1320.jpg_wh1200.jpg",
-        "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-        "exclusive": false,
-        "titleColor": "blue",
-        "showAdTag": false,
-        "targetType": 70000,
-        "targetId": 100000128,
-        "typeTitle": "新用户限时 还剩6天",
-        "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-        "songFinishStatus": false,
-        "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-    }
-    const c = {
-        "bannerId": "hp-vip-updt#t#UnLogin",
-        // "pic": "https://seopic.699pic.com/photo/40008/1970.jpg_wh1200.jpg",
-        "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-        "exclusive": false,
-        "titleColor": "blue",
-        "showAdTag": false,
-        "targetType": 70000,
-        "targetId": 100000128,
-        "typeTitle": "新用户限时 还剩6天",
-        "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-        "songFinishStatus": false,
-        "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-    }
-    carousel.data.push(a)
-    carousel.data.push(b)
-    carousel.data.push(c)
-
-    //首次渲染轮播图
-    carouselRender(carousel.data);
-})
+// import Ajax from "../service/ajax.js";
+// Ajax({
+//     url: "/homepage/block/page",
+// }).then((res) => {
+// const recommendData = [...res.data.blocks[3].creatives];
+// recommendRender(recommendData);
+// 获取推荐歌曲
+// carousel.data = res.data.blocks[0].extInfo.banners;
+// const a = {
+//     "bannerId": "hp-vip-updt#t#UnLogin",
+//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
+//     "exclusive": false,
+//     "titleColor": "blue",
+//     "showAdTag": false,
+//     "targetType": 70000,
+//     "targetId": 100000128, 
+//     "typeTitle": "新用户限时 还剩6天",
+//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
+//     "songFinishStatus": false,
+//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
+// }
+// const b = {
+//     "bannerId": "hp-vip-updt#t#UnLogin",
+//     // "pic": "https://seopic.699pic.com/photo/40008/1320.jpg_wh1200.jpg",
+//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
+//     "exclusive": false,
+//     "titleColor": "blue",
+//     "showAdTag": false,
+//     "targetType": 70000,
+//     "targetId": 100000128,
+//     "typeTitle": "新用户限时 还剩6天",
+//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
+//     "songFinishStatus": false,
+//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
+// }
+// const c = {
+//     "bannerId": "hp-vip-updt#t#UnLogin",
+//     // "pic": "https://seopic.699pic.com/photo/40008/1970.jpg_wh1200.jpg",
+//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
+//     "exclusive": false,
+//     "titleColor": "blue",
+//     "showAdTag": false,
+//     "targetType": 70000,
+//     "targetId": 100000128,
+//     "typeTitle": "新用户限时 还剩6天",
+//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
+//     "songFinishStatus": false,
+//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
+// }
+// carousel.data.push(a)
+// carousel.data.push(b)
+// carousel.data.push(c)
+// //首次渲染轮播图
+// carouselRender(carousel.data);
+// })
 
 
 import { debounce } from '../util/util.js'
@@ -250,30 +250,33 @@ function clearAllTimer() {
     }
 }
 
-function recommendRender(data) {
+export function recommendRender(data) {
     // 获得推荐歌单盒子
     const recommendWrapper = document.querySelector(".recommend-playlist-container");
-    let template = "";
-    let length = data.length;
-    data.forEach((item, index) => {
-        template += `<li data-index=${index} class="recommend-playlist-item d-flex flex-column}" style="width:${98 / length}%">
+    if (recommendWrapper) {
+        let template = "";
+        let length = data.length;
+        data.forEach((item, index) => {
+            template += `<li data-index=${index} class="recommend-playlist-item d-flex flex-column" style="width:${98 / length}%">
             <div class="recommend-playlist-cover">
                 <a href='#/recommendList/:${item.creativeId}'>
-                    <img src="${item.uiElement.image.imageUrl} alt="">
-                        <svg class="recommend-playlist-icon icon" aria-hidden="true">
-                            <use xlink:href="#icon-hanhan-01-011"></use>
-                        </svg>
+                    <img src="${item.uiElement.image.imageUrl}" alt="">
+                    <svg class="recommend-playlist-icon icon" aria-hidden="true">
+                     <use xlink:href="#icon-hanhan-01-011"></use>
+                    </svg>
                 </a>
             </div>
             <div class="recommend-playlist-title multi-text-omitted">
                 ${item.uiElement.mainTitle.title}
             </div>
         </li>`
-    })
-    recommendWrapper.innerHTML = template;
+        })
+        //渲染到页面上
+        recommendWrapper.innerHTML = template;
+    }
 }
 
-function initRecommendEvent() {
+export function initRecommendEvent() {
     //动态增加hover类
     const recommendWrapper = document.querySelector(".recommend-playlist-container")
     recommendWrapper.addEventListener("mouseenter",
