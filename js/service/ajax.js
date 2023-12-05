@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000"; 
+const BASE_URL = "http://localhost:3000";
 export default function Ajax({
     //请求参数配置
     method = "GET",
@@ -33,4 +33,16 @@ export async function getBannerList() {
         url: `/homepage/block/page`
     })
     return result
+}
+//推荐歌单初始化
+/**
+ * @description:获得推荐歌单列表
+ * @param{*} musicId
+ * @return
+*/
+export async function getRecommendList(musicId) {
+    const result = Ajax({
+        url: `/playlist/detail?id=${musicId}`
+    });
+    return result;
 }

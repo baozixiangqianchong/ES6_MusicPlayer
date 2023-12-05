@@ -98,6 +98,7 @@ function getNext() {
     let newArr = Array.from(carouselItems);
     let lens = newArr.length;
     let { width = 0 } = getElementRect(carouselItems[0]);
+    console.log("carouselItems[0]", carouselItems[0]);
     //当index为0时轮播图数组不做处理，>o时进行数组每一项移动
     index != 0 && (newArr = [...newArr.slice(-index, lens), ...newArr.slice(0, lens - index)]);
 
@@ -127,6 +128,7 @@ export function indicatorsRender(index) {
         }
     })
 }
+//获取盒子宽度
 function getElementRect(ele) {
     return ele.getBoundingClientRect();
 }
@@ -241,7 +243,9 @@ export function initCarouselEvent() {
         }, true)
 
 }
-function clearAllTimer() {
+export function clearAllTimer() {
+    //清除定时器，关闭了轮播图
+    //遍历清除所有的定时器
     if (carousel.autoCycleTimer.size > 0) {
         for (const i of carousel.autoCycleTimer) {
             clearInterval(i)
@@ -273,6 +277,7 @@ export function recommendRender(data) {
         })
         //渲染到页面上
         recommendWrapper.innerHTML = template;
+
     }
 }
 

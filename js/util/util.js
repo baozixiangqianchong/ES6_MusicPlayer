@@ -48,3 +48,16 @@ export function getRouteroptions(hash) {
     }
     return options
 }
+
+/**
+ * @description:日期格式化函数XXXX-XX-XX
+ * @param{*}time
+ * @return{*}
+ */
+export function formatCreateTime(time) {
+    let now = new Date(time);
+    let year = now.getFullYear();
+    let month = now.getMonth();
+    let day = now.getDay();
+    return `${year} - ${month} - ${day}`
+}
