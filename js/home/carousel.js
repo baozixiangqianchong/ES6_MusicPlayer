@@ -98,7 +98,6 @@ function getNext() {
     let newArr = Array.from(carouselItems);
     let lens = newArr.length;
     let { width = 0 } = getElementRect(carouselItems[0]);
-    console.log("carouselItems[0]", carouselItems[0]);
     //当index为0时轮播图数组不做处理，>o时进行数组每一项移动
     index != 0 && (newArr = [...newArr.slice(-index, lens), ...newArr.slice(0, lens - index)]);
 

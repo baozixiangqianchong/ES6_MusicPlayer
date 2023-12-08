@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/home.css" />
     <link rel="stylesheet" href="./css//recommendList.css" />
+    <link rel="stylesheet" href="./css/player.css" />
     <script src="./assets/iconfont.js"></script>
   </head>
   <body>
@@ -19,61 +20,46 @@
       </header>
       <section id="app" class="content">
         <!--中间页面html结构-->
-        <div class="w">
-          <div class="recommend-header">
-            <a href="#home">首页</a> /
-            <span>推荐歌单</span>
-          </div>
-          <div class="recommend-wrapper">
-            <!-- 推荐页内容 -->
-            <div class="recommend-describe d-flex justify-content-start">
-              <!-- 歌单介绍 -->
-              <div class="recommend-describe-left">
+        <div class="player-content d-flex w">
+          <div class="player-album-cover d-flex">
+            <!-- 歌曲封面 -->
+            <div class="ablum">
+              <div class="cover running">
                 <img
-                  src="https://tse1-mm.cn.bing.net/th/id/OIP-C.duz6S7Fvygrqd6Yj_DcXAQHaF7?rs=1&pid=ImgDetMain"
+                  src="https://seopic.699pic.com/photo/50059/6788.jpg_wh1200.jpg"
                   alt=""
                 />
               </div>
-              <div
-                class="recommend-describe-right d-flex flex-column align-items-start"
-              >
-                <h4 class="recommend-describe-right-title single-text-omitted">
-                  一旦热爱生活，生活就会教你治愈一切的魔法
-                </h4>
-                <div class="recommend-describe-right-creator d-flex">
-                  <img
-                    class="avatar"
-                    src="https://tse1-mm.cn.bing.net/th/id/OIP-C.duz6S7Fvygrqd6Yj_DcXAQHaF7?rs=1&pid=ImgDetMain"
-                    alt=""
-                  />
-                  <span class="creator">歌单创造者</span>
-                  <span class="create-time">创建时间</span>
-                </div>
-                <div class="recommend-describe-right-add d-flex">
-                  <span class="btn">播放全部</span><span class="add">+</span>
-                </div>
-                <div class="recommend-describe-right-info">
-                  <div class="info">
-                    <span class="label">标签：</span>
-                    <span class="tag">华语</span>
-                    <span class="tag">流行</span>
-                    <span class="tag">治愈</span>
-                  </div>
-                  <div class="info">
-                    <span class="label">歌曲：</span>
-                    <span class="label-info">30</span>
-                    <span class="label">播放：</span>
-                    <span class="label-info">275万</span>
-                  </div>
-                  <div class="info">
-                    <span class="label">简介：</span>
-                    <span class="label-info">你本身也漂亮温柔可爱</span>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="recommend-list">
-              <!-- 歌单列表 -->
+          </div>
+          <div class="player-lyric d-flex align-items-start">
+            <!--歌曲和歌词信息-->
+            <h3 class="song-name">老街</h3>
+            <div class="song-info">
+              <span class="song-album">专辑：小黄</span>
+              <span class="singer">歌手：李荣浩</span>
+              <span class="song-sour">来源：小黄</span>
+            </div>
+            <div class="lyric-wrap">
+              <p class="song-lyric-item"></p>
+              <p class="song-lyric-item">一张褪色的照片</p>
+              <p class="song-lyric-item">好像带给我一点点怀念</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+              <p class="song-lyric-item">一张褪色的照片</p>
+              <p class="song-lyric-item">好像带给我一点点怀念</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+              <p class="song-lyric-item">一张褪色的照片</p>
+              <p class="song-lyric-item">好像带给我一点点怀念</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+              <p class="song-lyric-item">一张褪色的照片</p>
+              <p class="song-lyric-item">好像带给我一点点怀念</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+              <p class="song-lyric-item">一张褪色的照片</p>
+              <p class="song-lyric-item">好像带给我一点点怀念</p>
+              <p class="song-lyric-item">巷尾老爷爷卖的热汤面</p>
+
+              <!--省略多行歌词可以自行复制上述格式-->
             </div>
           </div>
         </div>
@@ -139,6 +125,5 @@
         </div>
       </section>
     </div>
-    <!-- <script src="./js/index.js" type="module"></script> -->
   </body>
 </html>

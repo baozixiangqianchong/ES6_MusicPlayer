@@ -40,7 +40,6 @@ function initEvent() {
       const targetName = e.target.nodeName.toLocaleLowerCase();
       if (targetName == "li") {
         const id = e.target.getAttribute("data-index");
-        console.log(id, "id");
         activeProxy.active = id;
       }
     },
@@ -138,10 +137,10 @@ function initList() {
       <div class="songlist-number font-color">
         <span class="index">${index + 1}</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-hanhan-01-01"></use>
+            <use xlink:href="#icon-xihuan"></use>
           </svg>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-hanhan-01-01"></use>
+            <use xlink:href="#icon-xiazai"></use>
           </svg>
       </div>
       <div class="songlist-songname">${item.name}</div>
