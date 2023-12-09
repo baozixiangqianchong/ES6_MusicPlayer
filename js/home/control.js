@@ -61,7 +61,6 @@ function playPauseKeyRender() {
     const myAudio = document.querySelector("#myAudio");
     const playerControl = document.querySelector(".player-control-unit #player-control");
     //控制音乐的播放和暂停
-    // console.log(myAudio, myAudio.play(), myAudio.pause());
     isPlayProxy.isPlay ? myAudio.play() : myAudio.pause();
     //控制播放和暂停的图标
     isPlayProxy.isPlay

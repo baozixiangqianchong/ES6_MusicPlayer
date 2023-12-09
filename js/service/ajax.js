@@ -68,3 +68,14 @@ export async function getAudioInfo(musicId) {
     });
     return result;
 }
+/**
+ * @description:获得歌曲歌词
+ * @param{*]musicId
+ * @return{*}
+ */
+export async function getAudioLyric(musicId) {
+    const result = Ajax({
+        url: `/lyric?id=${musicId}`,
+    });
+    return result;
+}
