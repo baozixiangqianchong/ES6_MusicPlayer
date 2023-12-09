@@ -120,3 +120,35 @@ export function formatSonglyric(lyricStr) {
     })
     return lyric;
 }
+
+/**
+ * @description：添加歌曲列表去除重复
+ * @param {*}songList需要添加的列表
+ * @return {*}
+ */
+
+export function songListFilter(songList) {
+    let songListArr = JSON.parse(window.localStorage.getItem("songList")) || [];
+    let addToList = songList.map((item) => ({
+        id: item.id,
+        name: item.name,
+        ar: item.ar,
+        dt: item.dt,
+    }));
+    //去重
+    songListArr = [...addToList, ...songListArr];
+    const tempMap = new Map();
+    songListArr.forEach((item) => {
+        // 通过此方法达到的 Map 对象格式为{item.id->item},key值唯一性!
+        tempMap.has(item.id) && tempMap.set(item.id, item);
+    });
+    //限制数量
+    const limitArr = [...tempMap.values()];
+    limitArr.length > 100 && (limitArr = limitArr.slice(limitArr.length - 100));
+    // return limitArr;
+    return songListArr
+}
+//将时间转换为 mm:ss
+export function formatSongTime(timestamp) {
+    return `${Math.floor(timestamp / 1000 / 60)}:${Math.round((timestamp / 1000) % 60)}`;
+}

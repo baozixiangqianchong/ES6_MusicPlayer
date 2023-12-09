@@ -1,8 +1,8 @@
 import { getRecommendList } from "../service/ajax.js";
-import { formatCreateTime } from '../util/util.js'
+import { formatCreateTime, songListFilter } from '../util/util.js'
 import { clearAllTimer } from "../home/carousel.js";
 import { reactive } from "../util/reactive.js";
-import { PlayerCoverBackMode } from "../home/control.js";
+import { PlayerCoverBackMode, initPlayerControl, playerListRender } from "../home/control.js";
 
 const recommendDetail = {
   detail: {},
@@ -54,7 +54,6 @@ function initEvent() {
   songListWrap.addEventListener(
     "dblclick",
     async (e) => {
-      console.log(e, "e");
       //修改列表的播放图标
       const targetName = e.target.nodeName.toLocaleLowerCase();
       if (targetName == "li") {
@@ -66,10 +65,23 @@ function initEvent() {
         isPlayProxy.active = id;
         window.localStorage.setItem("musicId", id);
       }
-      isPlayProxy.isPlay = true; initPlayerControl();
+      isPlayProxy.isPlay = true;
+      initPlayerControl();
     },
     true
   )
+
+  /*点击将歌曲列表添加到播放列表中*/
+  const addSongList = document.querySelector(".recommend-describe-right-add");
+  addSongList.addEventListener("click",
+    () => {
+      //添加不重复的歌曲列表
+      const arr = songListFilter(recommendDetail.playlist);
+      //将数组加入到localstorage中
+      window.localStorage.setItem("songList", JSON.stringify(arr));
+      //动态生成播放列表
+      playerListRender();
+    });
 }
 
 
@@ -182,7 +194,6 @@ function initList() {
   listDomn.innerHTML = listTemplate;
 }
 
-import { initPlayerControl } from "../home/control.js";
 //双击播放音乐涉及到的变量，变量改变前面的播放标志也改变
 const isPlayProxy = reactive(
   {

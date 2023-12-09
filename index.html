@@ -14,14 +14,17 @@
     <script src="./assets/iconfont.js"></script>
   </head>
   <body>
-    <div class="wrapper d-flex flex-column">
+    <div class="wrapper d-flex flex-column all">
       <header class="header" id="header-title">
         <a href="#home">推荐页</a>
       </header>
       <section id="app" class="content">
         <!--中间页面html结构-->
       </section>
-
+      <div class="player-list display-none">
+        <h3 class="play-title">播放列表</h3>
+        <ul class="player-list-ul"></ul>
+      </div>
       <section class="player-control d-flex justify-content-start">
         <!--页面底部html结构-->
         <div class="player-control-songinfo d-flex justify-content-start">
@@ -55,15 +58,7 @@
               <use xlink:href="#icon-xiayiqu"></use>
             </svg>
           </div>
-          <div class="list">
-            <!--歌曲循环和列表-->
-            <svg class="icon" aria-hidden="true" id="musicMode">
-              <use xlink:href="#icon-liebiaoxunhuan"></use>
-            </svg>
-            <svg class="icon" aria-hidden="true" id="playerList">
-              <use xlink:href="#icon-24gf-playlistHeart"></use>
-            </svg>
-          </div>
+
           <div class="d-flex justify-content-between">
             <!--播放进度和音量-->
             <div class="song-progress d-flex justify-content-between">
@@ -84,9 +79,19 @@
               </div>
             </div>
           </div>
+          <div class="list">
+            <!--歌曲循环和列表-->
+            <svg class="icon" aria-hidden="true" id="musicMode">
+              <use xlink:href="#icon-liebiaoxunhuan"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true" id="playerList">
+              <use xlink:href="#icon-24gf-playlistHeart"></use>
+            </svg>
+          </div>
         </div>
       </section>
     </div>
+
     <!-- 添加音频 -->
     <audio src="" id="myAudio"></audio>
     <script src="./js/index.js" type="module"></script>

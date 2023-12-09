@@ -89,12 +89,15 @@ function initPlayerEvent() {
         const lyricItem = document.querySelectorAll(".song-lyric-item")
         if (!lyricItem.length) return;
         const currentTime = e.target.currentTime;
-        let i = 0; Array.from(lyricItem).forEach((item) => {
+        let i = 0;
+        Array.from(lyricItem).forEach((item) => {
             const time = item.getAttribute("data-time");
             if (currentTime > time) i++;
             item.classList.remove("active");
         });
-        lyricItem[i - 1].classList.add("active");
+        if (lyricItem[i - 1]) {
+            lyricItem[i - 1].classList.add("active");
+        }
         if (i > 5) {
             setScrollTop("lyric-wrap", "song-lyric-item", i - 1 - 5);
         }
