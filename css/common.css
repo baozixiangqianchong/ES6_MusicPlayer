@@ -80,3 +80,9 @@ a {
   padding: 0px;
   margin: 0px;
 }
+.pointer {
+  cursor: pointer;
+}
+.display-none {
+  display: none;
+}

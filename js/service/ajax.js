@@ -46,3 +46,25 @@ export async function getRecommendList(musicId) {
     });
     return result;
 }
+
+/**
+ * @description：获得音乐的播放地址
+ * @param{*] musicId
+ * @return{*}
+ */
+export async function getAudioSrc(musicId) {
+    let result = `https://music.163.com/song/media/outer/url?id=${musicId}`;
+    return result;
+}
+
+/**
+ * @description：获得歌曲信息
+ * @param{*} musicId
+ * @return{*]
+ */
+export async function getAudioInfo(musicId) {
+    const result = Ajax({
+        url: `/song/detail?ids=${musicId}`,
+    });
+    return result;
+}

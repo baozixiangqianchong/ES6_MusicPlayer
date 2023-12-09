@@ -2,6 +2,7 @@ import { getRecommendList } from "../service/ajax.js";
 import { formatCreateTime } from '../util/util.js'
 import { clearAllTimer } from "../home/carousel.js";
 import { reactive } from "../util/reactive.js";
+import { PlayerCoverBackMode } from "../home/control.js";
 
 const recommendDetail = {
   detail: {},
@@ -20,9 +21,14 @@ const activeProxy = reactive({
 export const recommendListPage = async ({ params = "" }) => {
   document.querySelector("#app").innerHTML = `加载中...`;
   const result = await getRecommendList(params);
+  const musicId = window.localStorage.getItem("musicId");
+
   if (result.code == 404) {
     document.querySelector("#app").innerHTML = `未找到资源`;
   } else {
+    window.localStorage.setItem("lastRecommendId", params);
+    PlayerCoverBackMode("player", musicId);
+
     recommendDetail.detail = result.playlist;
     recommendDetail.playlist = result.playlist.tracks;
     initDescribe();
@@ -34,18 +40,39 @@ export const recommendListPage = async ({ params = "" }) => {
 
 function initEvent() {
   const songListWrap = document.querySelector(".recommend-list-songlist-body");
+  // songListWrap.addEventListener(
+  //   "mouseenter",
+  //   (e) => {
+  //     const targetName = e.target.nodeName.toLocaleLowerCase();
+  //     if (targetName == "li") {
+  //       const id = e.target.getAttribute("data-index");
+  //       activeProxy.active = id;
+  //     }
+  //   },
+  //   true
+  // );
   songListWrap.addEventListener(
-    "mouseenter",
-    (e) => {
+    "dblclick",
+    async (e) => {
+      console.log(e, "e");
+      //修改列表的播放图标
       const targetName = e.target.nodeName.toLocaleLowerCase();
       if (targetName == "li") {
         const id = e.target.getAttribute("data-index");
-        activeProxy.active = id;
+        isPlayProxy.active = id;
+        window.localStorage.setItem("musicId", id);
+      } else if (targetName == "div") {
+        const id = e.target.parentNode.getAttribute("data-index");
+        isPlayProxy.active = id;
+        window.localStorage.setItem("musicId", id);
       }
+      isPlayProxy.isPlay = true; initPlayerControl();
     },
     true
   )
 }
+
+
 
 function initDescribe() {
   //推荐歌单描述初始化
@@ -154,3 +181,13 @@ function initList() {
   })
   listDomn.innerHTML = listTemplate;
 }
+
+import { initPlayerControl } from "../home/control.js";
+//双击播放音乐涉及到的变量，变量改变前面的播放标志也改变
+const isPlayProxy = reactive(
+  {
+    active: recommendDetail.listActive,//存放音乐的id
+    isPlay: false,//歌曲是否在播放
+  },
+  initList
+)
