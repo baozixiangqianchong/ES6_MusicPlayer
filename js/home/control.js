@@ -57,6 +57,7 @@ const musicIdProxy = reactive(
     },
     initPlayerControl,
 )
+
 const musicModeProxy = reactive(
     {
         musicMode: 0,
@@ -67,6 +68,7 @@ const musicModeProxy = reactive(
 function musicModeRender() {
     //控制播放功能
     const mode = window.localStorage.getItem("musicMode") || 0;
+    console.log("mode", mode);
     const musicModeStr = mode == 0
         ? '<use xlink:href="#icon-liebiaoxunhuan"></use>'
         : mode == 1
@@ -104,7 +106,6 @@ export function initPlayerEvent() {
     // 播放进度更新
     const myAudio = document.querySelector("#myAudio");
     const percent = setProcess("#volume-bar", "percentMode", 0.5);
-    console.log(percent);
     myAudio.volume = percent;
     myAudio.addEventListener("timeupdate", (e) => {
         const currentTime = e.target.currentTime;
@@ -169,7 +170,7 @@ async function playPauseKeyRender() {
     // isPlayProxy.isPlay ? myAudio.play() : myAudio.pause();
     try {
         // 尝试播放音频
-        await myAudio.play();
+        await isPlayProxy.isPlay ? myAudio.play() : myAudio.pause();
     } catch (error) {
         // 处理播放失败的情况
         alert("该歌曲无权限播放！")

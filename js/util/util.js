@@ -140,13 +140,13 @@ export function songListFilter(songList) {
     const tempMap = new Map();
     songListArr.forEach((item) => {
         // 通过此方法达到的 Map 对象格式为{item.id->item},key值唯一性!
-        tempMap.has(item.id) && tempMap.set(item.id, item);
+        !tempMap.has(item.id) && tempMap.set(item.id, item);
     });
     //限制数量
-    const limitArr = [...tempMap.values()];
+    let limitArr = [...tempMap.values()];
     limitArr.length > 100 && (limitArr = limitArr.slice(limitArr.length - 100));
-    // return limitArr;
-    return songListArr
+    return limitArr;
+    // return songListArr
 }
 //将时间转换为 mm:ss
 export function formatSongTime(timestamp) {

@@ -1,3 +1,6 @@
+import { debounce } from '../util/util.js'
+
+
 const carouselControl = `
 <button class="carousel-control carousel-control-left carousel-control-hover">
 <svg class="icon" aria-hidden="true">
@@ -102,7 +105,6 @@ function getNext() {
     index != 0 && (newArr = [...newArr.slice(-index, lens), ...newArr.slice(0, lens - index)]);
 
     newArr.forEach((item, i) => {
-
         if (i == 0) {
             // 因为向右移动，轮播图数组最后一项移动到第一项，其他项顺序不变
             item.style.opacity = 0;
@@ -131,65 +133,6 @@ export function indicatorsRender(index) {
 function getElementRect(ele) {
     return ele.getBoundingClientRect();
 }
-
-// import Ajax from "../service/ajax.js";
-// Ajax({
-//     url: "/homepage/block/page",
-// }).then((res) => {
-// const recommendData = [...res.data.blocks[3].creatives];
-// recommendRender(recommendData);
-// 获取推荐歌曲
-// carousel.data = res.data.blocks[0].extInfo.banners;
-// const a = {
-//     "bannerId": "hp-vip-updt#t#UnLogin",
-//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-//     "exclusive": false,
-//     "titleColor": "blue",
-//     "showAdTag": false,
-//     "targetType": 70000,
-//     "targetId": 100000128, 
-//     "typeTitle": "新用户限时 还剩6天",
-//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-//     "songFinishStatus": false,
-//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-// }
-// const b = {
-//     "bannerId": "hp-vip-updt#t#UnLogin",
-//     // "pic": "https://seopic.699pic.com/photo/40008/1320.jpg_wh1200.jpg",
-//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-//     "exclusive": false,
-//     "titleColor": "blue",
-//     "showAdTag": false,
-//     "targetType": 70000,
-//     "targetId": 100000128,
-//     "typeTitle": "新用户限时 还剩6天",
-//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-//     "songFinishStatus": false,
-//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-// }
-// const c = {
-//     "bannerId": "hp-vip-updt#t#UnLogin",
-//     // "pic": "https://seopic.699pic.com/photo/40008/1970.jpg_wh1200.jpg",
-//     "pic": "https://seopic.699pic.com/photo/40008/5974.jpg_wh1200.jpg",
-//     "exclusive": false,
-//     "titleColor": "blue",
-//     "showAdTag": false,
-//     "targetType": 70000,
-//     "targetId": 100000128,
-//     "typeTitle": "新用户限时 还剩6天",
-//     "url": "orpheus://nm/user/anonymousLogin?scene=NEW_GUEST_BANNER",
-//     "songFinishStatus": false,
-//     "logInfo": "{\"rightsAward\":\"homepage_one_day_vip\",\"loginStatus\":\"unLogin\"}"
-// }
-// carousel.data.push(a)
-// carousel.data.push(b)
-// carousel.data.push(c)
-// //首次渲染轮播图
-// carouselRender(carousel.data);
-// })
-
-
-import { debounce } from '../util/util.js'
 
 function leftHandle() {
     //左切换箭头事件处理//清空定时器暂停轮播
@@ -240,7 +183,6 @@ export function initCarouselEvent() {
                 carousel.autoCycleTimer.add(timer);
             }
         }, true)
-
 }
 export function clearAllTimer() {
     //清除定时器，关闭了轮播图
@@ -276,7 +218,6 @@ export function recommendRender(data) {
         })
         //渲染到页面上
         recommendWrapper.innerHTML = template;
-
     }
 }
 
