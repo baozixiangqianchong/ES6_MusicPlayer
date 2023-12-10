@@ -13,10 +13,20 @@
   color: #fff;
   padding: 15px 0;
 }
-.wrapper.content {
+.wrapper .content {
+  position: relative;
   width: 100%;
   min-height: 450px;
+  margin-top: 10px;
 }
+
+.resommend-playlist-cover img {
+  width: 100%;
+  height: auto;
+  font-size: 0;
+  transition: transform 0.2s linear;
+}
+
 .wrapper .player-control {
   background-color: #f6f6f8;
   height: 65px;
@@ -25,6 +35,7 @@
 
 .wrapper .content {
   width: 100%;
+  min-height: 450px;
 }
 .w {
   width: 90%;
@@ -39,7 +50,6 @@
   height: 300px;
   width: 100%;
   overflow: hidden;
-  
 }
 .carousel-content {
   position: absolute;
@@ -99,12 +109,13 @@
 .carousel-indicators > li {
   width: 50px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.461);
+  /* background-color: rgb(29, 29, 29); */
   margin: 15px 2px;
   cursor: pointer;
 }
 .carousel-indicators > .active {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgb(255, 255, 255);
 }
 .recommend-playlist {
   width: 100%;
@@ -127,21 +138,25 @@
   overflow: hidden;
   font-size: 0;
 }
-.recommend-playlist-cover > img {
+.recommend-playlist-cover img {
   width: 100%;
   height: auto;
   font-size: 0;
 }
 .recommend-playlist-cover .recommend-playlist-icon {
-  opacity: 0;
+  /* opacity: 0; */
   position: absolute;
   bottom: 10px;
   right: 5px;
-  color: #ccc;
+  color: #acaaaa;
   font-size: 20px;
+  transition: opacity 0.2 linear;
 }
 .hover .recommend-playlist-icon {
   opacity: 1;
+}
+.hover .recommend-playlist-cover img {
+  transform: scale(1.1);
 }
 .recommend-playlist-title {
   margin-top: 5px;
@@ -235,4 +250,7 @@
   height: 8px;
   border-radius: 50%;
   background-color: #4dc376;
+}
+.all {
+  position: relative;
 }

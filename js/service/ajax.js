@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000"; 
+const BASE_URL = "http://localhost:3000";
 export default function Ajax({
     //请求参数配置
     method = "GET",
@@ -33,4 +33,49 @@ export async function getBannerList() {
         url: `/homepage/block/page`
     })
     return result
+}
+//推荐歌单初始化
+/**
+ * @description:获得推荐歌单列表
+ * @param{*} musicId
+ * @return
+*/
+export async function getRecommendList(musicId) {
+    const result = Ajax({
+        url: `/playlist/detail?id=${musicId}`
+    });
+    return result;
+}
+
+/**
+ * @description：获得音乐的播放地址
+ * @param{*] musicId
+ * @return{*}
+ */
+export async function getAudioSrc(musicId) {
+    let result = `https://music.163.com/song/media/outer/url?id=${musicId}`;
+    return result;
+}
+
+/**
+ * @description：获得歌曲信息
+ * @param{*} musicId
+ * @return{*]
+ */
+export async function getAudioInfo(musicId) {
+    const result = Ajax({
+        url: `/song/detail?ids=${musicId}`,
+    });
+    return result;
+}
+/**
+ * @description:获得歌曲歌词
+ * @param{*]musicId
+ * @return{*}
+ */
+export async function getAudioLyric(musicId) {
+    const result = Ajax({
+        url: `/lyric?id=${musicId}`,
+    });
+    return result;
 }
